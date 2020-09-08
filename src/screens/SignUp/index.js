@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
     Container, InputArea, CustomButton, CustomButtonText,
     SignMessageButton, SignMessageButtonText, SignMessageButtonTextBold
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import Walker from '../../components/icons/Walker'
 import SignInput from '../../components/SignInput'
-
+import Api from '../../Api'
+import { UserContext } from '../../contexts/UserContext'
 
 export default () => {
+    const { dispatch: userDispatch } = useContext(UserContext)
     const navigation = useNavigation()
 
-    const [emailField, setEmailField] = useState(null)
-    const [passwordField, setPasswordField] = useState(null)
-    const [nameField, setNameField] = useState(null)
+    const [emailField, setEmailField] = useState('')
+    const [passwordField, setPasswordField] = useState('')
+    const [nameField, setNameField] = useState('')
 
     const handleMessageButtonClick = () => {
         //iremos enviá-lo para o SignUp, sem a possibilidade de voltar. (se voltar, fecha o App )
@@ -23,7 +26,26 @@ export default () => {
         })
     }
 
-    const handleSignClick = () => {
+    const handleSignClick = async () => {
+        if (nameField && passwordField && emailField) {
+            let res = await Api.signUp(nameField, emailField, passwordField)
+            if (res.token) {
+                await AsyncStorage.setItem('token', res.token)
+                userDispatch({
+                    type: 'setAvatar',
+                    payload: {
+                        avatar: res.data.avatar
+                    }
+                })
+                navigation.reset({
+                    routes: [{ name: 'MainTab' }]
+                })
+            } else {
+                alert("Erro: " + res.error)
+            }
+        } else {
+            alert('Preencha todos os campos')
+        }
 
     }
 

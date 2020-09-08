@@ -1,19 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
     Container, InputArea, CustomButton, CustomButtonText,
     SignMessageButton, SignMessageButtonText, SignMessageButtonTextBold
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import Walker from '../../components/icons/Walker'
 import SignInput from '../../components/SignInput'
+import Api from '../../Api'
+import { UserContext } from '../../contexts/UserContext'
 
 
 export default () => {
+    const { dispatch: userDispatch } = useContext(UserContext)
     const navigation = useNavigation()
 
-    const [emailField, setEmailField] = useState(null)
-    const [passwordField, setPasswordField] = useState(null)
+    const [emailField, setEmailField] = useState('')
+    const [passwordField, setPasswordField] = useState('')
 
     const handleMessageButtonClick = () => {
         //iremos enviá-lo para o SignUp, sem a possibilidade de voltar. (se voltar, fecha o App )
@@ -22,8 +26,26 @@ export default () => {
         })
     }
 
-    const handleSignClick = () => {
-
+    const handleSignClick = async () => {
+        if (emailField && passwordField) {
+            let json = await Api.signIn(emailField, passwordField)
+            if (json.token) {
+                await AsyncStorage.setItem('token', json.token)
+                userDispatch({
+                    type: 'setAvatar',
+                    payload: {
+                        avatar: json.data.avatar
+                    }
+                })
+                navigation.reset({
+                    routes: [{ name: 'MainTab' }]
+                })
+            } else {
+                alert("Email ou senha informados são inválidos!")
+            }
+        } else {
+            alert("Preencha todos os campos!")
+        }
     }
 
     return (
