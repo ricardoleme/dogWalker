@@ -9,6 +9,9 @@ export const UserReducer = (state, action) => {
         case 'setAvatar':
             return { ...state, avatar: action.payload.avatar }
             break
+        case 'setNome':
+            return { ...state, nome: action.payload.nome }
+            break    
         default:
             return state
     }

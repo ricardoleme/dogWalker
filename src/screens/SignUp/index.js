@@ -31,17 +31,24 @@ export default () => {
             let res = await Api.signUp(nameField, emailField, passwordField)
             if (res.token) {
                 await AsyncStorage.setItem('token', res.token)
+                let usuario = await Api.checkToken(res.token)
                 userDispatch({
                     type: 'setAvatar',
                     payload: {
-                        avatar: res.data.avatar
+                        avatar: usuario.avatar
+                    }
+                })
+                userDispatch({
+                    type: 'setNome',
+                    payload: {
+                        nome: usuario.nome
                     }
                 })
                 navigation.reset({
                     routes: [{ name: 'MainTab' }]
                 })
             } else {
-                alert("Erro: " + res.error)
+                alert("Erro: " + JSON.stringify(res.errors))
             }
         } else {
             alert('Preencha todos os campos')

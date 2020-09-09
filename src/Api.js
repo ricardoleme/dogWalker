@@ -1,58 +1,49 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-const BASE_API = 'https://api.b7web.com.br/devbarber/api'
+const BASE_API = 'http://localhost:4000'
 
 export default {
     checkToken:async(token) => {
-        const req = await fetch(`${BASE_API}/auth/refresh`,{
-            method: 'POST',
+        const req = await fetch(`${BASE_API}/usuario/eu`,{
+            method: 'GET',
             headers: {
                 Accept : 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({token})
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }
         })
         const json = await req.json()
         return json
     },
-    signIn:async(email, password) => {
-        const req = await fetch(`${BASE_API}/auth/login`,{
+    signIn:async(email, senha) => {
+        const req = await fetch(`${BASE_API}/usuario/login`,{
             method: 'POST',
             headers: {
                 Accept : 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, senha})
         })
         const json = await req.json()
         return json
         
     },
-    signUp:async(name, email, password) => {
-        const req = await fetch(`${BASE_API}/user`,{
+    signUp:async(nome, email, senha, tipo='cliente') => {
+        const req = await fetch(`${BASE_API}/usuario/novo`,{
             method: 'POST',
             headers: {
                 Accept : 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name, email, password})
+            body: JSON.stringify({nome, email, senha, tipo})
         })
         const json = await req.json()
         return json
         
     },
     logout:async() => {
-        const token = await AsyncStorage.getItem('token')
-        const req = await fetch(`${BASE_API}/auth/logout`,{
-            method: 'POST',
-            headers: {
-                Accept : 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({token})
-        })
-        const json = await req.json()
-        return json
+        const token = await AsyncStorage.removeItem('token')
+        return null
         
     },
     getBarbers:async(lat=null, lng=null) => {

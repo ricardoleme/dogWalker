@@ -1,5 +1,5 @@
 // cSpell:ignore Scroller
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { RefreshControl } from 'react-native'
 import {
     Container,
@@ -16,13 +16,14 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import * as Location from 'expo-location';
+import { UserContext } from '../../contexts/UserContext'
 
 import Api from '../../Api'
 import BarberItem from '../../components/BarberItem'
 
 
 export default () => {
-
+    const { state: user } = useContext(UserContext)
     const navigation = useNavigation()
 
     const [locationText, setLocationText] = useState('')
@@ -36,17 +37,26 @@ export default () => {
 
 
     async function handleLocationFinder() {
+        //http://www.mapquestapi.com/geocoding/v1/reverse?key=jnXhx8FAN7mrYKXRGYKN9OACPzeoAfvR&location=30.333472,-81.470448
         let { status } = await Location.requestPermissionsAsync();
         if (status == 'granted') {
             //iremos limpar o campo localização da UI
             setLocationText('Obtendo a sua localização...')
+            setLoading(true)
             location = await Location.getCurrentPositionAsync({});
-            //https://pt-br.reactjs.org/docs/hooks-rules.html
-            console.log("A latitude é", location.coords.latitude)
-            getBarbers()           
+            let lat = location.coords.latitude
+            let lng = location.coords.longitude
+            let url = `http://www.mapquestapi.com/geocoding/v1/reverse?key=jnXhx8FAN7mrYKXRGYKN9OACPzeoAfvR&location=${lat},${lng}`
+            
+            const endereco = await fetch(url)
+            const cidade = await endereco.json()
+            
+            setLocationText(cidade.results[0].locations[0].adminArea5+", "+cidade.results[0].locations[0].adminArea3)
+            //getBarbers()           
         } else {
             alert("Não há acesso a sua geolocalização. Digite sua cidade no campo por favor.")
         }
+        setLoading(false)
     }
 
     const getBarbers = async () => {
@@ -72,13 +82,13 @@ export default () => {
 
     //Carregando registros na primeira vez
     useEffect(() => {
-        getBarbers()
+        //getBarbers()
     }, [])
 
 
     const onRefresh = () => {
         setRefreshing(false)
-        getBarbers()
+        //getBarbers()
     }
 
     return (
@@ -88,7 +98,8 @@ export default () => {
             }>
                 <HeaderArea>
                     <HeaderTitle numberOfLines={2}>
-                        Encontre um passeador para o seu pet
+                        
+                        {user.nome}, encontre um passeador para o seu pet
                     </HeaderTitle>
                     <SearchButton onPress={() => navigation.navigate('Search')}>
                         <AntDesign name="search1" size={26} color="#FFFFFF" />

@@ -31,10 +31,17 @@ export default () => {
             let json = await Api.signIn(emailField, passwordField)
             if (json.token) {
                 await AsyncStorage.setItem('token', json.token)
+                let usuario = await Api.checkToken(json.token)
                 userDispatch({
                     type: 'setAvatar',
                     payload: {
-                        avatar: json.data.avatar
+                        avatar: usuario.avatar
+                    }
+                })
+                userDispatch({
+                    type: 'setNome',
+                    payload: {
+                        nome: usuario.nome
                     }
                 })
                 navigation.reset({
