@@ -12,6 +12,7 @@ align-items: center;
 export const Scroller = styled.ScrollView`
 flex: 1;
 padding: 5px;
+width: 95%;
 `
 
 export const HeaderArea = styled.View`
@@ -21,11 +22,11 @@ align-items: center;
 `
 
 export const HeaderTitle = styled.Text`
-width: 280px;
+width: 85%;
 font-size: 20px;
 font-weight: bold;
 color: #FFF;
-margin-top: 15px;
+margin-top: 25px;
 `
 
 export const SearchButton = styled.TouchableOpacity`

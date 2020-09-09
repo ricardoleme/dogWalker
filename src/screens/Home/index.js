@@ -41,15 +41,11 @@ export default () => {
             //iremos limpar o campo localização da UI
             setLocationText('Obtendo a sua localização...')
             location = await Location.getCurrentPositionAsync({});
-               
-            setLatitude(location.coords.latitude)
-            console.log(latitude)
             //https://pt-br.reactjs.org/docs/hooks-rules.html
-            getBarbers()
-            
-
+            console.log("A latitude é", location.coords.latitude)
+            getBarbers()           
         } else {
-            alert("Não há acesso a sua geolocalização. Digite no campo por favor.")
+            alert("Não há acesso a sua geolocalização. Digite sua cidade no campo por favor.")
         }
     }
 
