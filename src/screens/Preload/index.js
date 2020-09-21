@@ -5,8 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import { UserContext } from '../../contexts/UserContext';
 import Api from '../../Api';
-
-import Walker from '../../components/icons/Walker';
+// Utilize o link para converter o SVG em um componente React Native
+// https://react-svgr.com/playground/?expandProps=none&native=true
+import Dog from '../../components/icons/Dog'
 
 export default () => {
 
@@ -46,7 +47,7 @@ export default () => {
 
     return (
         <Container>
-            <Walker width="100%" height="160" />
+            <Dog width="100%" height="160" />
             <LoadingIcon size="large" color="#FFFFFF" />
         </Container>
     );

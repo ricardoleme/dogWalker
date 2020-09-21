@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-const BASE_API = 'http://localhost:4000'
+const BASE_API = 'https://backdogwalker.herokuapp.com'
 
 export default {
     checkToken:async(token) => {

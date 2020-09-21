@@ -1,9 +1,9 @@
 import * as React from "react"
 import Svg, { Path, Circle } from "react-native-svg"
 
-function SvgComponent(props: React.SVGProps<SVGSVGElement>) {
+function SvgComponent() {
   return (
-    <Svg height={512} viewBox="0 0 512 512" width={512} {...props}>
+    <Svg height={512} viewBox="0 0 512 512" width={512}>
       <Path
         d="M336 216l-24 32-40 16-24 16-16-16v-16l24-8 40-24 24-48 16.468 39.404z"
         fill="#fdc9a6"

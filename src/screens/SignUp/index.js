@@ -6,7 +6,7 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-community/async-storage'
 
-import Walker from '../../components/icons/Walker'
+import Dog from '../../components/icons/Dog'
 import SignInput from '../../components/SignInput'
 import Api from '../../Api'
 import { UserContext } from '../../contexts/UserContext'
@@ -58,7 +58,7 @@ export default () => {
 
     return (
         <Container>
-            <Walker height="40%" />
+            <Dog height="40%" />
             <InputArea>
                 <SignInput
                     icon="user"
