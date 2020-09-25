@@ -13,6 +13,10 @@ export const InputArea = styled.View`
 padding: 40px;
 width: 100%;
 `
+export const Logo = styled.View`
+transform: scale(0.5)
+`
+
 export const CustomButton = styled.TouchableOpacity`
 height: 60px;
 background-color: #268596;
@@ -40,4 +44,5 @@ font-size: 16px;
 color: #268596;
 font-weight: bold;
 margin-left: 5px;
+margin-bottom: 50px;
 `

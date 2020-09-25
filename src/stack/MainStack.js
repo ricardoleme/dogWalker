@@ -1,9 +1,13 @@
 import React from 'react';
+/* 
+   O React Navigation Stack fornece uma maneira para seu aplicativo fazer a transição entre telas 
+   e gerenciar o histórico de navegação.
+*/
 import { createStackNavigator } from '@react-navigation/stack'
 import Preload from '../screens/Preload'
 import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
-import Barber from '../screens/Barber'
+import DogWalker from '../screens/DogWalker'
 import MainTab from '../stack/MainTab'
 
 const Stack = createStackNavigator()
@@ -20,7 +24,7 @@ export default () => {
             <Stack.Screen name="SignIn" component={SignIn} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="MainTab" component={MainTab} />
-            <Stack.Screen name="Barber" component={Barber} />
+            <Stack.Screen name="DogWalker" component={DogWalker} />
         </Stack.Navigator>
     )
 }

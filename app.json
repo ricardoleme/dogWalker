@@ -24,7 +24,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#4EADBE"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -37,6 +37,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "MAP_QUEST_API_KEY" : "jnXhx8FAN7mrYKXRGYKN9OACPzeoAfvR"
     }
   }
 }

@@ -1,38 +1,31 @@
+// cSpell:Ignore usuario
 import React, { useEffect, useContext } from 'react';
-import { Container, LoadingIcon } from './styles';
+import { Container, LoadingIcon, Logo } from './styles';
+/*
+O Async-Storage é um sistema de armazenamento de valor-chave assíncrono, não criptografado, 
+persistente para React Native.
+*/
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
-
-import { UserContext } from '../../contexts/UserContext';
 import Api from '../../Api';
 // Utilize o link para converter o SVG em um componente React Native
 // https://react-svgr.com/playground/?expandProps=none&native=true
 import Dog from '../../components/icons/Dog'
 
 export default () => {
-
-    const { dispatch: userDispatch } = useContext(UserContext);
     const navigation = useNavigation();
 
-    useEffect(()=>{
+    useEffect(() => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('token');
-            if(token) {
+            if (token) {
                 let res = await Api.checkToken(token);
-                if(res.nome) {
-
-                    await AsyncStorage.setItem('token', res.token);
-
-                    userDispatch({
-                        type: 'setAvatar',
-                        payload:{
-                            avatar: res.avatar,
-                            nome: res.nome
-                        }
-                    });
-
+                if (res.nome) {
+                    const dadosToken = ['token', token]
+                    const dadosUsuario = ['usuario', JSON.stringify(res)]
+                    await AsyncStorage.multiSet([dadosToken, dadosUsuario])
                     navigation.reset({
-                        routes:[{name:'MainTab'}]
+                        routes: [{ name: 'MainTab' }]
                     });
 
                 } else {
@@ -47,7 +40,9 @@ export default () => {
 
     return (
         <Container>
-            <Dog width="100%" height="160" />
+            <Logo>
+            <Dog />
+            </Logo>
             <LoadingIcon size="large" color="#FFFFFF" />
         </Container>
     );

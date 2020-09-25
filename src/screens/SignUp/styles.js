@@ -7,7 +7,9 @@ flex: 1;
 justify-content: center;
 align-items: center;
 `
-
+export const Logo = styled.View`
+transform: scale(0.5)
+`
 
 export const InputArea = styled.View`
 padding: 40px;

@@ -49,27 +49,27 @@ export default () => {
     const route = useRoute()
 
     const [userInfo, setUserInfo] = useState({
-        id: route.params.id,
+        _id: route.params._id,
         avatar: route.params.avatar,
-        name: route.params.name,
-        stars: route.params.stars
+        nome: route.params.nome,
+        estrelas: route.params.estrelas
     })
     const [loading, setLoading] = useState(false)
     const [favorited, setFavorited] = useState(false)
 
     useEffect(() => {
-        const getBarberInfo = async () => {
+        const getPasseadorInfo = async () => {
             setLoading(true)
-            let json = await Api.getBarber(userInfo.id)
+            let json = await Api.getPasseador(userInfo._id)
             if (json.error) {
                 alert(json.error)
             } else {
-                setUserInfo(json.data)
-                setFavorited(json.data.favorited)
+                setUserInfo(json)
+                setFavorited(json.favorited)
             }
             setLoading(false)
         }
-        getBarberInfo()
+        getPasseadorInfo()
     }, [])
 
     const handleBackButton = () => {
@@ -82,7 +82,7 @@ const handleFavClick = () => {
         <Container>
             <Scroller>
                 {
-                    userInfo.photos && userInfo.photos.length > 0
+                    userInfo.fotos && userInfo.fotos.length > 0
                         ? <Swiper
                             style={{ height: 240 }}
                             dot={<SwipeDot />}
@@ -90,7 +90,7 @@ const handleFavClick = () => {
                             paginationStyle={{ top: 15, right: 15, bottom: null, left: null }}
                             autoplay={true}
                         >
-                            {userInfo.photos.map((item, key) => (
+                            {userInfo.fotos.map((item, key) => (
                                 <SwipeItem key={key}>
                                     <SwipeImage source={{ uri: item.url }} resizeMode="cover" />
                                 </SwipeItem>
@@ -102,8 +102,8 @@ const handleFavClick = () => {
                     <UserInfoArea>
                         <UserAvatar source={{ uri: userInfo.avatar }} />
                         <UserInfo>
-                            <UserInfoName>{userInfo.name}</UserInfoName>
-                            <Stars stars={userInfo.stars} showNumber={true} />
+                            <UserInfoName>{userInfo.nome}</UserInfoName>
+                            <Stars stars={userInfo.estrelas} showNumber={true} />
                         </UserInfo>
                         <UserFavButton onPress={handleFavClick}>
                             {favorited 
@@ -116,14 +116,14 @@ const handleFavClick = () => {
                     {loading &&
                         <LoadingIcon size="large" color="#000" />
                     }
-                    {userInfo.services &&
+                    {userInfo.servicos &&
                         <ServiceArea>
                             <ServiceTitle>Lista de Serviços</ServiceTitle>
-                            {userInfo.services.map((item, key) => (
+                            {userInfo.servicos.map((item, key) => (
                                 <ServiceItem key={key}>
                                     <ServiceInfo>
-                                        <ServiceName>{item.name}</ServiceName>
-                                        <ServicePrice>R$ {item.price}</ServicePrice>
+                                        <ServiceName>{item.nome}</ServiceName>
+                                        <ServicePrice>R$ {item.preco}</ServicePrice>
                                     </ServiceInfo>
                                     <ServiceChooseButton>
                                         <ServiceChooseBtnText>Agendar</ServiceChooseBtnText>
@@ -132,7 +132,7 @@ const handleFavClick = () => {
                             ))}
                         </ServiceArea>
                     }
-                    {userInfo.testimonials && userInfo.testimonials.length > 0 &&
+                    {userInfo.testemunhos && userInfo.testemunhos.length > 0 &&
                         <TestimonialArea>
                             <Swiper
                                 style={{ height: 110 }}
@@ -141,14 +141,14 @@ const handleFavClick = () => {
                                 prevButton={<AntDesign name="arrowleft" size={35} color="#000" />}
                                 nextButton={<AntDesign name="arrowright" size={35} color="#000" />}
                             >
-                                {userInfo.testimonials.map((item, key) => (
+                                {userInfo.testemunhos.map((item, key) => (
                                     <TestimonialItem key={key}>
                                         <TestimonialInfo>
-                                            <TestimonialName>{item.name}</TestimonialName>
-                                            <Stars stars={item.rate} showNumber={false} />
+                                            <TestimonialName>{item.usuario}</TestimonialName>
+                                            <Stars stars={item.estrelas} showNumber={false} />
                                         </TestimonialInfo>
                                         <TestimonialBody>
-                                            {item.body}
+                                            {item.texto}
                                         </TestimonialBody>
                                     </TestimonialItem>
                                 )

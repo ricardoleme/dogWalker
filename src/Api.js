@@ -1,11 +1,14 @@
+// cSpell:Ignore usuario
 import AsyncStorage from '@react-native-community/async-storage';
 
-const BASE_API = 'https://backdogwalker.herokuapp.com'
+//const BASE_API = 'https://backdogwalker.herokuapp.com'
+const BASE_API = 'http://localhost:4000'
 
 export default {
     checkToken:async(token) => {
         const req = await fetch(`${BASE_API}/usuario/eu`,{
             method: 'GET',
+            mode: 'cors',
             headers: {
                 Accept : 'application/json',
                 'Content-Type': 'application/json',
@@ -17,6 +20,7 @@ export default {
     },
     signIn:async(email, senha) => {
         const req = await fetch(`${BASE_API}/usuario/login`,{
+            mode:'cors',
             method: 'POST',
             headers: {
                 Accept : 'application/json',
@@ -42,20 +46,36 @@ export default {
         
     },
     logout:async() => {
-        const token = await AsyncStorage.removeItem('token')
+        const chaves = ['token', 'usuario']
+        await AsyncStorage.multiRemove(chaves)
         return null
         
     },
-    getBarbers:async(lat=null, lng=null) => {
-        const token = await AsyncStorage.getItem('token')
-        const req = await fetch(`${BASE_API}/barbers?token=${token}&lat=${lat}&lng=${lng}`)
+    getPasseadores:async() => {
+        let token = await AsyncStorage.getItem('token')
+        const req = await fetch(`${BASE_API}/passeador`,{
+            method: 'GET',
+            headers: {
+                Accept : 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }
+        })
         const json = await req.json()
-        return json 
+        return json
     },
-    getBarber:async(id) => {
-        const token = await AsyncStorage.getItem('token')
-        const req = await fetch(`${BASE_API}/barber/${id}?token=${token}`)
+    getPasseador:async(id) => {
+        let token = await AsyncStorage.getItem('token')
+        const req = await fetch(`${BASE_API}/passeador/${id}`,{
+            method: 'GET',
+            headers: {
+                Accept : 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            }
+        })
         const json = await req.json()
-        return json 
+        console.log(json)
+        return json
     }
 }

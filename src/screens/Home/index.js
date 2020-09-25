@@ -1,4 +1,4 @@
-// cSpell:ignore Scroller
+// cSpell:ignore Scroller, endereco, usuario
 import React, { useState, useEffect, useContext } from 'react';
 import { RefreshControl } from 'react-native'
 import {
@@ -16,28 +16,42 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import * as Location from 'expo-location';
-import { UserContext } from '../../contexts/UserContext'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Api from '../../Api'
-import BarberItem from '../../components/BarberItem'
-
+import DogWalkerItem from '../../components/DogWalkerItem'
+import Constants from 'expo-constants';
 
 export default () => {
-    const { state: user } = useContext(UserContext)
-    const navigation = useNavigation()
 
+    //Carregando registros na primeira vez
+    useEffect(() => {
+        getPasseadores()
+    }, [])
+
+    //Verificando usuário logado
+    useEffect(() => {
+        verificaUsuario()
+    }, [usuario])
+
+    const verificaUsuario = async () => {
+        setLoading(true)
+        setUsuario([])
+        let dados = await AsyncStorage.getItem('usuario')
+        setUsuario(JSON.parse(dados))
+        setLoading(false)
+    }
+
+    const navigation = useNavigation()
     const [locationText, setLocationText] = useState('')
-    const [latitude, setLatitude] = useState(null)
-    const [longitude, setLongitude] = useState(null)
     const [loading, setLoading] = useState(false)
     const [list, setList] = useState([])
     const [refreshing, setRefreshing] = useState(false)
+    const [usuario, setUsuario] = useState([])
 
     var location = null;
 
-
     async function handleLocationFinder() {
-        //http://www.mapquestapi.com/geocoding/v1/reverse?key=jnXhx8FAN7mrYKXRGYKN9OACPzeoAfvR&location=30.333472,-81.470448
         let { status } = await Location.requestPermissionsAsync();
         if (status == 'granted') {
             //iremos limpar o campo localização da UI
@@ -46,49 +60,34 @@ export default () => {
             location = await Location.getCurrentPositionAsync({});
             let lat = location.coords.latitude
             let lng = location.coords.longitude
-            let url = `http://www.mapquestapi.com/geocoding/v1/reverse?key=jnXhx8FAN7mrYKXRGYKN9OACPzeoAfvR&location=${lat},${lng}`
-            
+            let keyMap = Constants.manifest.extra.MAP_QUEST_API_KEY
+            let url = `http://www.mapquestapi.com/geocoding/v1/reverse?key=${keyMap}&location=${lat},${lng}`
+
             const endereco = await fetch(url)
             const cidade = await endereco.json()
-            
-            setLocationText(cidade.results[0].locations[0].adminArea5+", "+cidade.results[0].locations[0].adminArea3)
-            //getBarbers()           
+
+            setLocationText(cidade.results[0].locations[0].adminArea5 + ", " + cidade.results[0].locations[0].adminArea3)
+            //getPasseadores(token)          
         } else {
             alert("Não há acesso a sua geolocalização. Digite sua cidade no campo por favor.")
         }
         setLoading(false)
     }
 
-    const getBarbers = async () => {
+    const getPasseadores = async () => {
         setLoading(true)
         setList([])
-        let lat = null
-        let lng = null
-        if (latitude && longitude) {
-            lat = latitude
-            lng = longitude
-        }
-        let res = await Api.getBarbers(lat, lng)
-        if (res.error === '') {
-            if (res.loc) {
-                setLocationText(res.loc)
-            }
-            setList(res.data)
-        } else {
-            alert("Erro: " + res.error)
-        }
+        let res = await Api.getPasseadores()
+        setList(res)
         setLoading(false)
     }
 
-    //Carregando registros na primeira vez
-    useEffect(() => {
-        //getBarbers()
-    }, [])
+
 
 
     const onRefresh = () => {
         setRefreshing(false)
-        //getBarbers()
+        getPasseadores()
     }
 
     return (
@@ -98,8 +97,10 @@ export default () => {
             }>
                 <HeaderArea>
                     <HeaderTitle numberOfLines={2}>
-                        
-                        {user.nome}, encontre um passeador para o seu pet
+                        {usuario !== null
+                            ? `${usuario.nome}, encontre um profissional para o seu pet`
+                            : 'Encontre um profissional para o seu pet'}
+
                     </HeaderTitle>
                     <SearchButton onPress={() => navigation.navigate('Search')}>
                         <AntDesign name="search1" size={26} color="#FFFFFF" />
@@ -122,7 +123,7 @@ export default () => {
                 }
                 <ListArea>
                     {list.map((item, k) => (
-                        <BarberItem key={k} data={item} />
+                        <DogWalkerItem key={k} data={item} />
                     ))}
                 </ListArea>
             </Scroller>

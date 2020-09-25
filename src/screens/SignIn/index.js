@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import {
     Container, InputArea, CustomButton, CustomButtonText,
-    SignMessageButton, SignMessageButtonText, SignMessageButtonTextBold
+    SignMessageButton, SignMessageButtonText, SignMessageButtonTextBold, Logo
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-community/async-storage'
@@ -57,7 +57,9 @@ export default () => {
 
     return (
         <Container>
-            <Dog height="40%" />
+            <Logo>
+            <Dog/>
+            </Logo>
             <InputArea>
                 <SignInput
                     icon="mail"

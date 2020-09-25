@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/native'
-import Stars from '../components/Stars'
+import Stars from './Stars'
 import { useNavigation } from '@react-navigation/native'
 
 export default ({data}) => {
     const navigation = useNavigation()
 
     const handleClick = () => {
-navigation.navigate('Barber',{
-    id: data.id,
+navigation.navigate('DogWalker',{
+    _id: data._id,
     avatar: data.avatar,
-    name: data.name,
-    stars: data.stars
+    nome: data.nome,
+    estrelas: data.estrelas
 })
     }
 
@@ -20,9 +20,9 @@ navigation.navigate('Barber',{
 <Avatar source={{uri: data.avatar}} />
 <InfoArea>
     <UserName>
-        {data.name}
+       {data.nome}
     </UserName>
-    <Stars stars={data.stars} showNumber={true} />
+    <Stars stars={data.estrelas} showNumber={true} />
     <SeeProfileButton>
         <SeeProfileButtonText>Ver Perfil</SeeProfileButtonText>
     </SeeProfileButton>

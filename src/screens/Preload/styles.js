@@ -11,3 +11,8 @@ align-items: center;
 export const LoadingIcon = styled.ActivityIndicator`
 margin-top: 50px; 
 `
+
+export const Logo = styled.View`
+transform: scale(0.5);
+
+`

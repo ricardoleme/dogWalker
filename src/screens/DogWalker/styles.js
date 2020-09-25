@@ -160,8 +160,8 @@ justify-content: space-between;
 margin-bottom: 5px;
 `
 export const TestimonialName = styled.Text`
-color: #FFF;
-font-size: 14px;
+color: #000;
+font-size: 16px;
 font-weight: bold;
 `
 export const TestimonialBody = styled.Text`
