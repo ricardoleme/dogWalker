@@ -8,21 +8,21 @@ export default ({data}) => {
 
     const handleClick = () => {
 navigation.navigate('DogWalker',{
-    _id: data._id,
-    avatar: data.avatar,
-    nome: data.nome,
-    estrelas: data.estrelas
+    _id: data.detalhes[0]._id,
+    avatar: data.detalhes[0].avatar,
+    nome: data.detalhes[0].nome,
+    estrelas: data.detalhes[0].estrelas
 })
     }
 
     return (
 <Area onPress={handleClick}>
-<Avatar source={{uri: data.avatar}} />
+<Avatar source={{uri: data.detalhes[0].avatar}} />
 <InfoArea>
     <UserName>
-       {data.nome}
+       {data.detalhes[0].nome} 
     </UserName>
-    <Stars stars={data.estrelas} showNumber={true} />
+    <Stars stars={data.detalhes[0].estrelas} showNumber={true} />
     <SeeProfileButton>
         <SeeProfileButtonText>Ver Perfil</SeeProfileButtonText>
     </SeeProfileButton>

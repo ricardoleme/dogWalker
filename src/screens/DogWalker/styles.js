@@ -69,7 +69,7 @@ border-color: #FFF;
 
 export const UserInfoName = styled.Text`
 color: #000;
-font-size: 18px;
+font-size: 12px;
 font-weight: bold;
 margin-bottom: 10px;
 `

@@ -102,7 +102,7 @@ const handleFavClick = () => {
                     <UserInfoArea>
                         <UserAvatar source={{ uri: userInfo.avatar }} />
                         <UserInfo>
-                            <UserInfoName>{userInfo.nome}</UserInfoName>
+                            <UserInfoName>{userInfo.nome} </UserInfoName>
                             <Stars stars={userInfo.estrelas} showNumber={true} />
                         </UserInfo>
                         <UserFavButton onPress={handleFavClick}>

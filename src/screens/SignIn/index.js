@@ -28,7 +28,6 @@ export default () => {
 
     const handleSignClick = async () => {
         if (emailField && passwordField) {
-            console.log(emailField, passwordField)
             let json = await Api.signIn(emailField, passwordField)
             if (json.access_token) {
                 await AsyncStorage.setItem('token', json.access_token)

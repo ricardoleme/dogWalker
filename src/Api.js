@@ -75,7 +75,8 @@ export default {
             }
         })
         const json = await req.json()
-        console.log(json)
-        return json
+        const primeiroItem = json.shift()
+        console.log(primeiroItem)
+        return primeiroItem
     }
 }
