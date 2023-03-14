@@ -4,7 +4,7 @@ import {
     SignMessageButton, SignMessageButtonText, SignMessageButtonTextBold, Logo
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import Dog from '../../components/icons/Dog'
 import SignInput from '../../components/SignInput'
@@ -29,26 +29,13 @@ export default () => {
     const handleSignClick = async () => {
         if (nameField && passwordField && emailField) {
             let res = await Api.signUp(nameField, emailField, passwordField)
-            if (res.token) {
-                await AsyncStorage.setItem('token', res.token)
-                let usuario = await Api.checkToken(res.token)
-                userDispatch({
-                    type: 'setAvatar',
-                    payload: {
-                        avatar: usuario.avatar
-                    }
-                })
-                userDispatch({
-                    type: 'setNome',
-                    payload: {
-                        nome: usuario.nome
-                    }
-                })
+            if (res.acknowledged) {
+               alert('✅Usuário criado com sucesso. Efetue o login')
                 navigation.reset({
-                    routes: [{ name: 'MainTab' }]
+                    routes: [{ name: 'SignIn' }]
                 })
             } else {
-                alert("Erro: " + JSON.stringify(res.errors))
+                alert("Erro: " + JSON.stringify(res.errors ? res.errors[0].msg : 'Ocorreu um erro no login'))
             }
         } else {
             alert('Preencha todos os campos')
@@ -64,7 +51,7 @@ export default () => {
             <InputArea>
                 <SignInput
                     icon="user"
-                    placeholder="Digite o seu nome completo"
+                    placeholder="Nome Completo"
                     value={nameField}
                     onChangeText={t => setNameField(t)}
                 />

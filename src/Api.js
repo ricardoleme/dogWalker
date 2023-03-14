@@ -1,12 +1,12 @@
 // cSpell:Ignore usuario
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-//const BASE_API = 'https://backdogwalker.herokuapp.com'
-const BASE_API = 'http://localhost:4000'
+const BASE_API = 'https://dog-walker-back.vercel.app/api/'
+//const BASE_API = 'http://localhost:4000'
 
 export default {
     checkToken:async(token) => {
-        const req = await fetch(`${BASE_API}/usuario/eu`,{
+        const req = await fetch(`${BASE_API}/usuarios/token`,{
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -19,7 +19,7 @@ export default {
         return json
     },
     signIn:async(email, senha) => {
-        const req = await fetch(`${BASE_API}/usuario/login`,{
+        const req = await fetch(`${BASE_API}/usuarios/login`,{
             mode:'cors',
             method: 'POST',
             headers: {
@@ -32,8 +32,8 @@ export default {
         return json
         
     },
-    signUp:async(nome, email, senha, tipo='cliente') => {
-        const req = await fetch(`${BASE_API}/usuario/novo`,{
+    signUp:async(nome, email, senha, tipo='Cliente') => {
+        const req = await fetch(`${BASE_API}/usuarios`,{
             method: 'POST',
             headers: {
                 Accept : 'application/json',
@@ -53,7 +53,7 @@ export default {
     },
     getPasseadores:async() => {
         let token = await AsyncStorage.getItem('token')
-        const req = await fetch(`${BASE_API}/passeador`,{
+        const req = await fetch(`${BASE_API}/passeadores`,{
             method: 'GET',
             headers: {
                 Accept : 'application/json',
@@ -66,7 +66,7 @@ export default {
     },
     getPasseador:async(id) => {
         let token = await AsyncStorage.getItem('token')
-        const req = await fetch(`${BASE_API}/passeador/${id}`,{
+        const req = await fetch(`${BASE_API}/passeadores/${id}`,{
             method: 'GET',
             headers: {
                 Accept : 'application/json',

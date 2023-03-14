@@ -16,7 +16,7 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import * as Location from 'expo-location';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Api from '../../Api'
 import DogWalkerItem from '../../components/DogWalkerItem'

@@ -11,15 +11,9 @@ Projeto em Expo/React Native que implementa um pequeno CRUD.
   </a>
 </p>
 <p align="center">
-  [![supports iOS](https://img.shields.io/badge/iOS-999999.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff)](https://github.com/expo/expo)
-[![supports Android](https://img.shields.io/badge/Android-A4C639.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff)](https://github.com/expo/expo)
-
-
-
+<img alt="iOS" src="https://img.shields.io/badge/iOS-999999.svg?style=for-the-badge&logo=iOS&logoColor=fff"> 
+<img alt="Android" src="https://img.shields.io/badge/Android-A4C639.svg?style=for-the-badge&logo=Android&logoColor=black"> 
   <img alt="JS" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
-
-
-
 </p>
 
 # 🧠 Contexto

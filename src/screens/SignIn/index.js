@@ -4,7 +4,7 @@ import {
     SignMessageButton, SignMessageButtonText, SignMessageButtonTextBold, Logo
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import Dog from '../../components/icons/Dog'
 import SignInput from '../../components/SignInput'
@@ -28,10 +28,11 @@ export default () => {
 
     const handleSignClick = async () => {
         if (emailField && passwordField) {
+            console.log(emailField, passwordField)
             let json = await Api.signIn(emailField, passwordField)
-            if (json.token) {
-                await AsyncStorage.setItem('token', json.token)
-                let usuario = await Api.checkToken(json.token)
+            if (json.access_token) {
+                await AsyncStorage.setItem('token', json.access_token)
+                let usuario = await Api.checkToken(json.access_token)
                 userDispatch({
                     type: 'setAvatar',
                     payload: {
@@ -48,7 +49,7 @@ export default () => {
                     routes: [{ name: 'MainTab' }]
                 })
             } else {
-                alert("Email ou senha informados são inválidos!")
+                alert("Erro: " + JSON.stringify(json.errors ? json.errors[0].msg : 'Ocorreu um erro no login'))
             }
         } else {
             alert("Preencha todos os campos!")

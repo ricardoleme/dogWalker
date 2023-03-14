@@ -5,7 +5,7 @@ import { Container, LoadingIcon, Logo } from './styles';
 O Async-Storage é um sistema de armazenamento de valor-chave assíncrono, não criptografado, 
 persistente para React Native.
 */
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Api from '../../Api';
 // Utilize o link para converter o SVG em um componente React Native

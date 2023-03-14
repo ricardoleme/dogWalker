@@ -32,16 +32,16 @@ color: #FFF;
 export const SignMessageButton = styled.TouchableOpacity`
 flex-direction: row;
 justify-content: center;
-margin-top: 50px;
-margin-bottom: 20px;
+margin-top: 20px;
+margin-bottom: 50px;
 `
 export const SignMessageButtonText = styled.Text`
-font-size: 16px;
+font-size: 14px;
 color: #268596;
 `
 export const SignMessageButtonTextBold = styled.Text`
-font-size: 16px;
-color: #268596;
+font-size: 14px;
+color: #fff;
 font-weight: bold;
 margin-left: 5px;
 margin-bottom: 50px;
