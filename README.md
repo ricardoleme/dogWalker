@@ -16,19 +16,14 @@ Projeto em Expo/React Native que implementa um pequeno CRUD.
   <img alt="JS" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
 </p>
 
-# 🧠 Contexto
+# 🧠 Backend
+O código fonte do Backend do projeto está disponível em: https://github.com/ricardoleme/dogWalkerBack
 
-Uma das dificuldades dos desenvolvedores de é implementar um pequeno CRUD que possua autenticação, sem antes se envolver em um framework web, como o Vue, Angular ou React.
-O propósito desse pequeno sistema é mostrar que é possível desenvolvermos uma aplicação 100% na nuvem, utilizando apenas HTML, CSS e Javascript.
 ## 📋 Instruções
 
 - [ ] Inicialmente clone o projeto; 
 - [ ] Instale as dependências com ```npm i```
 - [ ] Inicie o projeto com ```npx expo start```
-
-
-## 🌐 Veja uma demonstração online do projeto. 
-
 
 
 ## 📷 Imagens do Projeto
