@@ -32,11 +32,16 @@ O propósito desse pequeno sistema é mostrar que é possível desenvolvermos um
 
 
 ## 📷 Imagens do Projeto
-![Inicio](screenshots/inicio.jpg "Interface Inicial")
-![Login](screenshots/login.jpg "Interface de Login")
-![Menu](screenshots/menu.jpg "Interface Menu Inicial")
-![Detalhe](screenshots/detalhe.jpg "Detalhe do Passeador")
-
+<table>
+<tr>
+<td><img src="screenshots/inicio.jpg" alt="Interface Inicial" height="300"></td>
+<td><img src="screenshots/login.jpg" alt="Interface de Login" height="300"></td>
+</tr>
+<tr>
+<td><img src="screenshots/menu.jpg" alt="Interface do Menu" height="300"></td>
+<td><img src="screenshots/detalhe.jpg" alt="Interface do Detalhe do Passeador" height="300"></td>
+</tr>
+</table>
 
 
 ## 💬 Contato

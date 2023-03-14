@@ -75,9 +75,9 @@ export default () => {
     const handleBackButton = () => {
         navigation.goBack()
     }
-const handleFavClick = () => {
-    setFavorited(!favorited)
-}
+    const handleFavClick = () => {
+        setFavorited(!favorited)
+    }
     return (
         <Container>
             <Scroller>
@@ -106,9 +106,9 @@ const handleFavClick = () => {
                             <Stars stars={userInfo.estrelas} showNumber={true} />
                         </UserInfo>
                         <UserFavButton onPress={handleFavClick}>
-                            {favorited 
-                            ? <AntDesign name="heart" size={24} color="#FF0000" />
-                            : <AntDesign name="hearto" size={24} color="#AAA" />
+                            {favorited
+                                ? <AntDesign name="heart" size={24} color="#FF0000" />
+                                : <AntDesign name="hearto" size={24} color="#AAA" />
                             }
 
                         </UserFavButton>
@@ -145,7 +145,6 @@ const handleFavClick = () => {
                                     <TestimonialItem key={key}>
                                         <TestimonialInfo>
                                             <TestimonialName>{item.usuario}</TestimonialName>
-                                        
                                         </TestimonialInfo>
                                         <Stars stars={item.estrelas} showNumber={false} />
                                         <TestimonialBody>
