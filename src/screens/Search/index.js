@@ -5,7 +5,7 @@ import { Text } from 'react-native'
 export default () => {
 return (
     <Container>
-<Text>Search</Text>
+<Text>Implemente a interface de busca/filtros</Text>
     </Container>
 )
 }

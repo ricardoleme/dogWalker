@@ -69,7 +69,7 @@ border-color: #FFF;
 
 export const UserInfoName = styled.Text`
 color: #000;
-font-size: 12px;
+font-size: 15px;
 font-weight: bold;
 margin-bottom: 10px;
 `
@@ -89,8 +89,8 @@ margin-top: 20px;
 
 export const BackButton = styled.TouchableOpacity`
 position: absolute;
-left: 5px;
-top: 5px;
+left: 8px;
+top: 24px;
 z-index: 2
 `
 

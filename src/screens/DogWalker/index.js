@@ -145,8 +145,9 @@ const handleFavClick = () => {
                                     <TestimonialItem key={key}>
                                         <TestimonialInfo>
                                             <TestimonialName>{item.usuario}</TestimonialName>
-                                            <Stars stars={item.estrelas} showNumber={false} />
+                                        
                                         </TestimonialInfo>
+                                        <Stars stars={item.estrelas} showNumber={false} />
                                         <TestimonialBody>
                                             {item.texto}
                                         </TestimonialBody>

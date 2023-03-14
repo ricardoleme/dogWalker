@@ -52,7 +52,7 @@ export default () => {
     var location = null;
 
     async function handleLocationFinder() {
-        let { status } = await Location.requestPermissionsAsync();
+        let { status } = await Location.requestForegroundPermissionsAsync()
         if (status == 'granted') {
             //iremos limpar o campo localização da UI
             setLocationText('Obtendo a sua localização...')
@@ -60,8 +60,8 @@ export default () => {
             location = await Location.getCurrentPositionAsync({});
             let lat = location.coords.latitude
             let lng = location.coords.longitude
-            let keyMap = Constants.manifest.extra.MAP_QUEST_API_KEY
-            let url = `http://www.mapquestapi.com/geocoding/v1/reverse?key=${keyMap}&location=${lat},${lng}`
+            let keyMap = Constants.manifest.extra.MAP_QUEST_API_KEY //Informe a chave no arquivo app.json
+            let url = `https://www.mapquestapi.com/geocoding/v1/reverse?key=${keyMap}&location=${lat},${lng}&outFormat=json`
 
             const endereco = await fetch(url)
             const cidade = await endereco.json()
@@ -97,10 +97,7 @@ export default () => {
             }>
                 <HeaderArea>
                     <HeaderTitle numberOfLines={2}>
-                        {usuario !== null
-                            ? `${usuario.nome}, encontre um profissional para o seu pet`
-                            : 'Encontre um profissional para o seu pet'}
-
+                        Encontre um profissional para o seu pet'
                     </HeaderTitle>
                     <SearchButton onPress={() => navigation.navigate('Search')}>
                         <AntDesign name="search1" size={26} color="#FFFFFF" />

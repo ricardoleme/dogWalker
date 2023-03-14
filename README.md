@@ -25,18 +25,18 @@ O propósito desse pequeno sistema é mostrar que é possível desenvolvermos um
 - [ ] Inicialmente clone o projeto; 
 - [ ] Instale as dependências com ```npm i```
 - [ ] Inicie o projeto com ```npx expo start```
-```
+
 
 ## 🌐 Veja uma demonstração online do projeto. 
 
 
 
 ## 📷 Imagens do Projeto
-![Login](images/login.png "Login com Usuário e Senha ou Login via Google")
+![Inicio](screenshots/inicio.jpg "Interface Inicial")
+![Login](screenshots/login.jpg "Interface de Login")
+![Menu](screenshots/menu.jpg "Interface Menu Inicial")
+![Detalhe](screenshots/detalhe.jpg "Detalhe do Passeador")
 
-
-## 📚 Inspirações
-- 
 
 
 ## 💬 Contato

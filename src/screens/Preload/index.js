@@ -20,7 +20,7 @@ export default () => {
             const token = await AsyncStorage.getItem('token');
             if (token) {
                 let res = await Api.checkToken(token);
-                if (res.nome) {
+                if (res.access_token) {
                     const dadosToken = ['token', token]
                     const dadosUsuario = ['usuario', JSON.stringify(res)]
                     await AsyncStorage.multiSet([dadosToken, dadosUsuario])

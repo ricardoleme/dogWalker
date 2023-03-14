@@ -5,7 +5,7 @@ import { Text } from 'react-native'
 export default () => {
 return (
     <Container>
-<Text>Favorites</Text>
+<Text>Liste os passeadores favoritados</Text>
     </Container>
 )
 }
