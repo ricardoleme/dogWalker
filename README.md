@@ -53,8 +53,6 @@ Prof. Ms. Ricardo Leme <br>
 
 Esse projeto está sob a licença Apache. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 ---
-Made with 💜, HTML, CSS and only Vanilla JS. 
----
 ## ⚠️Erros no Swiper
 
 Vá até node_modules/react-native-swiper/index.js
@@ -68,3 +66,6 @@ por:
 export default Swiper
 export {Swiper}
 ```
+
+---
+Made with 💜, React Native and Expo. 
