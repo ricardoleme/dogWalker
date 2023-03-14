@@ -34,12 +34,12 @@ O propósito desse pequeno sistema é mostrar que é possível desenvolvermos um
 ## 📷 Imagens do Projeto
 <table>
 <tr>
-<td><img src="screenshots/inicio.jpg" alt="Interface Inicial" height="300"></td>
-<td><img src="screenshots/login.jpg" alt="Interface de Login" height="300"></td>
+<td><img src="screenshots/inicio.jpg" alt="Interface Inicial" width="600"></td>
+<td><img src="screenshots/login.jpg" alt="Interface de Login" width="600"></td>
 </tr>
 <tr>
-<td><img src="screenshots/menu.jpg" alt="Interface do Menu" height="300"></td>
-<td><img src="screenshots/detalhe.jpg" alt="Interface do Detalhe do Passeador" height="300"></td>
+<td><img src="screenshots/menu.jpg" alt="Interface do Menu" width="600"></td>
+<td><img src="screenshots/detalhe.jpg" alt="Interface do Detalhe do Passeador" width="600"></td>
 </tr>
 </table>
 
